@@ -14,8 +14,16 @@ type Gonsole struct {
 
 func New() *Gonsole {
 	gon := &Gonsole{}
-	gon.reader = bufio.NewReader(os.Stdin)
+
+	// setting standard input source for reader
+	gon.SetSource(os.Stdin)
+
 	return gon
+}
+
+// Set custom input source (this separate method is mainly here for testing purposes)
+func (gon *Gonsole) SetSource(input *os.File) {
+	gon.reader = bufio.NewReader(input)
 }
 
 // Asks user to enter a valid integer value until he enters correct value.
